@@ -1,0 +1,1 @@
+// Duplicated with Interview Preparation Kit/01 Warm-up Challenges/01_Sock_Merchant.c
