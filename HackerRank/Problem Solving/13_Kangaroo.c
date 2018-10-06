@@ -23,8 +23,29 @@ char** split_string(char*);
 // return str;
 //
 char* kangaroo(int x1, int v1, int x2, int v2) {
+    static char YES[] = "YES";
+    static char NO[] = "NO";
+    char *ret;
+    double calcul;
+    
+    /*
+     *        v1>v2  v1=v2  v1<v2
+     * x1<x2    ?      X      X
+     */
+    ret = NO;
+    if(v1 > v2) // && (x1 < x2)
+    {
+        /*
+         * j is jumps. j is natural number if "OK"
+         * x1 + v1 * j == x2 + v2 * j
+         * j == (x2 - x1) / (v1 - v2)
+         * (x2 - x1) % (v1 - v2) == 0?
+         */
+        if((x2 - x1) % (v1 - v2) == 0)
+            ret = YES;
+    }
 
-
+    return ret;
 }
 
 int main()
