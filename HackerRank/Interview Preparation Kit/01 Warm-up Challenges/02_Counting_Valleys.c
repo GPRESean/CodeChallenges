@@ -12,8 +12,39 @@ char* readline();
 
 // Complete the countingValleys function below.
 int countingValleys(int n, char* s) {
-
-
+#define SEALEVEL  0
+#define UPHILL    1
+#define VALLEY    2
+    int cur_land, cur_level;
+    int uphill_cnt, valley_cnt;
+    int i, step;
+    
+    cur_land = 0;
+    cur_level = 0;
+    uphill_cnt = 0;
+    valley_cnt = 0;
+    for(i = 0; i < n; i++)
+    {
+        step = (s[i] == 'U')? (UPHILL) : (VALLEY);
+        if(cur_land == SEALEVEL)
+            cur_land = step;
+        
+        if(step == UPHILL)
+            cur_level++;
+        else
+            cur_level--;
+        
+        if(cur_level == 0)
+        {
+            if(cur_land == UPHILL)
+                uphill_cnt++;
+            else // (cur_land == VALLEY)
+                valley_cnt++;
+            cur_land = SEALEVEL;
+        }
+    }
+    
+    return valley_cnt;
 }
 
 int main()
