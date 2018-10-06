@@ -11,10 +11,48 @@
 char* readline();
 char** split_string(char*);
 
+inline int is_in_range(int start, int end, int pos)
+{
+    return ((start <= pos) && (pos <= end));
+}
+
 // Complete the countApplesAndOranges function below.
 void countApplesAndOranges(int s, int t, int a, int b, int apples_count, int* apples, int oranges_count, int* oranges) {
-
-
+    int apple_cnt = apples_count;
+    int *apple_arr = (int *)malloc(apple_cnt * sizeof(int));
+    
+    int orange_cnt = oranges_count;
+    int *orange_arr = (int *)malloc(orange_cnt * sizeof(int));
+    
+    int i, in_apples_cnt, in_oranges_cnt;
+    
+    memcpy(apple_arr, apples, apple_cnt * sizeof(int));
+    memcpy(orange_arr, oranges, orange_cnt * sizeof(int));
+    
+    // Calculate absolute x-coordinate of Apples and Count is in range
+    in_apples_cnt = 0;
+    for(i = 0; i < apple_cnt; i++)
+    {
+        apple_arr[i] += a;
+        if(is_in_range(s, t, apple_arr[i]))
+            in_apples_cnt++;
+    }
+    
+    // Calculate absolute x-coordinate of Oranges and Count is in range
+    in_oranges_cnt = 0;
+    for(i = 0; i < orange_cnt; i++)
+    {
+        orange_arr[i] += b;
+        if(is_in_range(s, t, orange_arr[i]))
+            in_oranges_cnt++;
+    }
+    
+    printf("%d\n%d\n", in_apples_cnt, in_oranges_cnt);
+    
+    free(apple_arr);
+    free(orange_arr);
+    
+    return;
 }
 
 int main()
