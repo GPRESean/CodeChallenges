@@ -25,7 +25,26 @@ int* gradingStudents(int grades_count, int* grades, int* result_count) {
     /*
      * Write your code here.
      */
-
+    int i, score, remain;
+    
+    for(i = 0; i < grades_count; i++)
+    {
+        score = grades[i];
+        if(score < 38)
+            continue;
+        else
+        {
+            remain = score % 5;
+            if(remain >= 3)
+            {
+                score += (5 - remain);
+                grades[i] = score;
+            }
+        }
+    }
+    
+    *result_count = grades_count;
+    return grades;
 }
 
 int main()
@@ -51,7 +70,7 @@ int main()
     }
 
     int result_count;
-    int* result = gradingStudents(grades_count, grades, &result_count);
+    int* result = gradingStudents(n, grades, &result_count);
 
     for (int result_itr = 0; result_itr < result_count; result_itr++) {
         fprintf(fptr, "%d", result[result_itr]);
