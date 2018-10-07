@@ -13,8 +13,30 @@ char** split_string(char*);
 
 // Complete the jumpingOnClouds function below.
 int jumpingOnClouds(int c_count, int* c) {
+    int i;
+    int jump_cnt;
 
-
+    jump_cnt = 0;
+    i = 0;
+    while(i < c_count)
+    {
+        if( (i + 2 < c_count) && (c[i+2] == 0) )
+        {
+            i += 2;
+            jump_cnt++;
+        }
+        else if( (i + 1 < c_count) && (c[i+1] == 0) )
+        {
+            i += 1;
+            jump_cnt++;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    
+    return jump_cnt;
 }
 
 int main()
