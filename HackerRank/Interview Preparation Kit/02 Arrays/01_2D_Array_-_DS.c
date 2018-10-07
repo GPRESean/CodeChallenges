@@ -11,10 +11,37 @@
 char* readline();
 char** split_string(char*);
 
+int getHourglassSum(int **arr, int row, int col)
+{
+    int sum;
+    sum = arr[row][col] + arr[row][col+1] + arr[row][col+2]
+        + arr[row+1][col+1]
+        + arr[row+2][col] + arr[row+2][col+1] + arr[row+2][col+2];
+    return sum;
+}
+
 // Complete the hourglassSum function below.
 int hourglassSum(int arr_rows, int arr_columns, int** arr) {
+    int i, j;
+    // int *hourglassArr;
+    int tmp, max;
+    
+    // hourglassArr = (int *)malloc((arr_rows-2) * (arr_columns-2) * sizeof(int));
+    
+    max = INT_MIN;
+    for(i = 0; i < arr_rows - 2; i++)
+    {
+        for(j = 0; j < arr_columns - 2; j++)
+        {
+            tmp = getHourglassSum(arr, i, j);
+            // hourglassArr[i][j] = tmp;
+            max = (tmp > max)? (tmp) : (max);
+        }
+    }
+    
+    // free(hourglassArr);
 
-
+    return max;
 }
 
 int main()
