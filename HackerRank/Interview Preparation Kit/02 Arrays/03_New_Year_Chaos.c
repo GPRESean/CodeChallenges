@@ -13,8 +13,46 @@ char** split_string(char*);
 
 // Complete the minimumBribes function below.
 void minimumBribes(int q_count, int* q) {
-
-
+    int i, j;
+    int bride_cnt;
+    
+    /*
+     * Test Cases
+     * {1 2 3 4 5} -> 0
+     * {2 5 1 3 4} -> Too chaotic
+     * {2 5 1 3 4} -> Too chaotic
+     * {4 3 2 1 5} -> Too chaotic
+     * {2 1 5 3 4} -> 3
+     * {1 2 4 5 3} -> 2
+     * {1 2 5 3 4} -> 2
+     * {1 3 2 5 4} -> 2
+     *
+     * {1 2 5 4 3} -> 3*
+     * {1 4 3 5 2} -> 3*
+     * {1 2 5 3 7 8 6 4} -> 7*
+     */
+    bride_cnt = 0;
+    for(i = q_count-1; i >= 0; i--)
+    {
+        if(q[i] - (i+1) > 2)
+        {
+            bride_cnt = -1;
+            break;
+        }
+        j = (q[i]-2 > 0)? (q[i]-2) : (0);
+        for(j; j < i; j++)
+        {
+            if(q[j] > q[i])
+                bride_cnt++;
+        }
+    }
+    
+    if(bride_cnt == -1)
+        printf("Too chaotic\n");
+    else
+        printf("%d\n", bride_cnt);
+    
+    return;
 }
 
 int main()
