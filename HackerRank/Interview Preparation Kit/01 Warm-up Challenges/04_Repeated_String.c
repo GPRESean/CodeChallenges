@@ -12,8 +12,29 @@ char* readline();
 
 // Complete the repeatedString function below.
 long repeatedString(char* s, long n) {
+    long i, remainder;
+    int s_len, a_cnt;
+    long total_a_cnt;
 
-
+    s_len = strlen(s);
+    remainder = n % s_len;
+    
+    a_cnt = 0;
+    for(i = 0; i < remainder; i++)
+    {
+        if(s[i] == 'a')
+            a_cnt++;
+    }
+    total_a_cnt = a_cnt;
+    
+    for(i = remainder; i < s_len; i++)
+    {
+        if(s[i] == 'a')
+            a_cnt++;
+    }
+    total_a_cnt += (n / s_len) * a_cnt;
+    
+    return total_a_cnt;
 }
 
 int main()
