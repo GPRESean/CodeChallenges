@@ -11,6 +11,25 @@
 char* readline();
 char** split_string(char*);
 
+void rotLeftOne(int *arr, int arr_len)
+{
+    int i, tmp;
+    tmp = arr[0];
+    for(i = 0; i < arr_len-1; i++)
+        arr[i] = arr[i+1];
+    arr[arr_len-1] = tmp;
+    return;
+}
+void rotRightOne(int *arr, int arr_len)
+{
+    int i, tmp;
+    tmp = arr[arr_len-1];
+    for(i = arr_len-1; i > 0; i--)
+        arr[i] = arr[i-1];
+    arr[0] = tmp;
+    return;
+}
+
 // Complete the rotLeft function below.
 
 // Please store the size of the integer array to be returned in result_count pointer. For example,
@@ -21,8 +40,25 @@ char** split_string(char*);
 // return a;
 //
 int* rotLeft(int a_count, int* a, int d, int* result_count) {
-
-
+    void (*rotOne)(int *arr, int arr_len);
+    int i, rot_cnt;
+    
+    if(d <= ((int)a_count/2))
+    {
+        rotOne = &rotLeftOne;
+        rot_cnt = d;
+    }
+    else
+    {
+        rotOne = &rotRightOne;
+        rot_cnt = a_count - d;
+    }
+    
+    for(i = 0; i < rot_cnt; i++)
+        rotOne(a, a_count);
+    
+    *result_count = a_count;
+    return a;
 }
 
 int main()
